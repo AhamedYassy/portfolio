@@ -1,85 +1,444 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>5 façons d'utiliser l'IA au quotidien</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Ahamedxassy</title>
+  <meta name="description" content="Blog sur le Marketing Digital, l’Intelligence Artificielle et le Montage Vidéo : conseils, tendances et frameworks." />
+
   <style>
-    body {
+    :root{
+      --primary:#667eea;
+      --secondary:#764ba2;
+      --dark:#1a202c;
+      --light:#f7fafc;
+      --gray:#4a5568;
+      --card:#ffffff;
+      --border:#e2e8f0;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      margin: 0;
-      background: #f7fafc;
-      color: #1a202c;
-      line-height: 1.8;
+      background:var(--light);
+      color:var(--dark);
+      line-height:1.7;
     }
-    header {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      padding: 50px 20px;
+
+    /* Header */
+    header{
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color:#fff;
+      padding:56px 20px 40px;
+      position:relative;
+      overflow:hidden;
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
+    header::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='60' cy='60' r='46' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+      opacity:.35;
     }
-    article {
-      background: white;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      position:relative;
+      z-index:1;
     }
-    h1 {
-      margin-top: 0;
+    .topline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
     }
-    a {
-      color: #667eea;
-      font-weight: 700;
-      text-decoration: none;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
     }
-    .back {
-      display: inline-block;
-      margin-top: 25px;
+    .brand-badge{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size:18px;
+    }
+    .navlinks{
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .navlinks a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
+      transition: transform .2s ease, background .2s ease;
+      white-space:nowrap;
+    }
+    .navlinks a:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.20); }
+
+    h1{
+      margin:22px 0 6px;
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      line-height:1.15;
+      text-shadow:0 2px 14px rgba(0,0,0,.18);
+    }
+    .subtitle{
+      margin:0;
+      opacity:.95;
+      color: rgba(255,255,255,.95);
+      max-width:820px;
+      font-size: 1.05rem;
+    }
+
+    /* Controls */
+    .controls{
+      margin-top:20px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .search{
+      flex: 1 1 320px;
+      display:flex;
+      gap:10px;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:14px;
+      padding:10px 12px;
+    }
+    .search input{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:#fff;
+      font-size:1rem;
+    }
+    .search input::placeholder{ color: rgba(255,255,255,.78); }
+    .pillbar{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      cursor:pointer;
+      user-select:none;
+      padding:9px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.92rem;
+      background: rgba(255,255,255,0.14);
+      border:1px solid rgba(255,255,255,0.16);
+      color:#fff;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.20); }
+    .pill.active{
+      background:#fff;
+      color: var(--primary);
+      border-color:#fff;
+    }
+
+    /* Main */
+    main{ padding: 34px 20px 60px; }
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+    }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      overflow:hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(102,126,234,0.14);
+    }
+    .cardhead{
+      padding:20px 20px 0;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.85rem;
+      color: var(--primary);
+      background: rgba(102,126,234,0.12);
+      border:1px solid rgba(102,126,234,0.22);
+      white-space:nowrap;
+    }
+    .meta{
+      color: var(--gray);
+      font-size:.92rem;
+      white-space:nowrap;
+    }
+    .cardbody{ padding: 14px 20px 18px; }
+    .title{
+      margin:0 0 8px;
+      font-size: 1.35rem;
+      line-height:1.25;
+    }
+    .title a{
+      color: var(--dark);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .excerpt{
+      margin:0 0 14px;
+      color: var(--gray);
+    }
+    .actions{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .read{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+      color: var(--primary);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      background: rgba(102,126,234,0.10);
+      border: 1px solid rgba(102,126,234,0.18);
+    }
+    .read:hover{ background: rgba(102,126,234,0.14); }
+    .tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .tag{
+      font-size:.85rem;
+      color: var(--gray);
+      background: #f1f5f9;
+      border:1px solid var(--border);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    /* Empty */
+    .empty{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px;
+      border-radius:16px;
+      border:1px dashed var(--border);
+      background:#fff;
+      color:var(--gray);
+    }
+
+    /* Footer */
+    footer{
+      text-align:center;
+      padding: 22px 20px 40px;
+      color: var(--gray);
+    }
+    footer a{ color: var(--primary); font-weight:800; text-decoration:none; }
+
+    /* Responsive */
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
+
 <body>
+  <header>
+    <div class="wrap">
+      <div class="topline">
+        <div class="brand">
+          <div class="brand-badge">📝</div>
+          <div>Blog — Ahamedxassy</div>
+        </div>
 
-<header>
-  <div class="container">
-    <h1>5 façons d'utiliser l'IA au quotidien sans être un expert en tech</h1>
-    <p>IA • Lecture : 5 min • 2026</p>
-  </div>
-</header>
+        <div class="navlinks">
+          <a href="../">← Retour au portfolio</a>
+          <a href="../#contact">Me contacter</a>
+        </div>
+      </div>
 
-<main class="container">
-  <article>
+      <h1>Articles : Marketing, IA & Vidéo</h1>
+      <p class="subtitle">
+        Des contenus pratiques (SEO, conversion, scripts, tendances) pour apprendre, appliquer et publier plus vite.
+      </p>
 
-    <p>
-      L’intelligence artificielle n’est plus réservée aux experts.
-      Voici comment l’utiliser concrètement dans la vie quotidienne.
-    </p>
+      <div class="controls">
+        <div class="search" title="Rechercher un article">
+          🔎
+          <input id="searchInput" type="search" placeholder="Rechercher un sujet (ex: IA, SEO, vidéo, storytelling)..." />
+        </div>
 
-    <h2>1. Organiser un voyage</h2>
-    <p>Utiliser l’IA pour comparer, planifier et optimiser ses déplacements.</p>
+        <div class="pillbar" aria-label="Filtres">
+          <div class="pill active" data-filter="all">Tout</div>
+          <div class="pill" data-filter="ia">IA</div>
+          <div class="pill" data-filter="marketing">Marketing</div>
+          <div class="pill" data-filter="video">Vidéo</div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <h2>2. Améliorer ses photos</h2>
-    <p>Correction automatique, suppression d’objets, amélioration de la qualité.</p>
+  <main>
+    <div id="grid" class="grid">
 
-    <h2>3. Mieux manger</h2>
-    <p>Idées de repas, calculs nutritionnels, recettes personnalisées.</p>
+      <!-- ARTICLE 1 -->
+      <article class="card post" data-category="ia" data-title="5 façons d'utiliser l'IA au quotidien sans être un expert en tech">
+        <div class="cardhead">
+          <div class="badge">🤖 IA</div>
+          <div class="meta">Lecture : 5 min • 2026</div>
+        </div>
+        <div class="cardbody">
+          <h2 class="title">
+            <a href="./article-ia-quotidien.html">5 façons d'utiliser l'IA au quotidien sans être un expert en tech</a>
+          </h2>
+          <p class="excerpt">
+            Voyage, photos, cuisine, langues, productivité : des usages simples et concrets, expliqués sans jargon.
+          </p>
+          <div class="actions">
+            <a class="read" href="./article-ia-quotidien.html">Lire l’article →</a>
+            <div class="tags">
+              <span class="tag">Productivité</span>
+              <span class="tag">Outils</span>
+              <span class="tag">Débutant</span>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <h2>4. Apprendre plus vite</h2>
-    <p>Langues, résumé de contenus, explications simplifiées.</p>
+      <!-- ARTICLE 2 (à activer quand tu le crées) -->
+      <article class="card post" data-category="video" data-title="Montage vidéo : les tendances qui dominent en 2026">
+        <div class="cardhead">
+          <div class="badge">🎬 Vidéo</div>
+          <div class="meta">Lecture : 6 min • 2026</div>
+        </div>
+        <div class="cardbody">
+          <h2 class="title">
+            <a href="./article-montage-2026.html">Montage vidéo : les tendances qui dominent en 2026</a>
+          </h2>
+          <p class="excerpt">
+            Vertical, micro-animations, authenticité, IA générative : comment adapter ton montage aux plateformes.
+          </p>
+          <div class="actions">
+            <a class="read" href="./article-montage-2026.html">Lire l’article →</a>
+            <div class="tags">
+              <span class="tag">Shorts</span>
+              <span class="tag">TikTok</span>
+              <span class="tag">Tendances</span>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <h2>5. Gagner du temps au travail</h2>
-    <p>Emails, synthèses, organisation des tâches.</p>
+      <!-- ARTICLE 3 (à activer quand tu le crées) -->
+      <article class="card post" data-category="marketing" data-title="Comment créer une stratégie de contenu vidéo qui convertit en 2026">
+        <div class="cardhead">
+          <div class="badge">📈 Marketing</div>
+          <div class="meta">Lecture : 7 min • 2026</div>
+        </div>
+        <div class="cardbody">
+          <h2 class="title">
+            <a href="./article-strategie-video-2026.html">Comment créer une stratégie de contenu vidéo qui convertit en 2026</a>
+          </h2>
+          <p class="excerpt">
+            Objectifs, formats, scripts, distribution : une méthode claire pour transformer des vues en résultats.
+          </p>
+          <div class="actions">
+            <a class="read" href="./article-strategie-video-2026.html">Lire l’article →</a>
+            <div class="tags">
+              <span class="tag">Conversion</span>
+              <span class="tag">Stratégie</span>
+              <span class="tag">Content</span>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <p><strong>Conclusion :</strong> L’IA est un outil, pas une menace.</p>
+    </div>
 
-    <a class="back" href="./">← Retour au blog</a>
+    <div id="empty" class="empty" style="display:none;">
+      Aucun article ne correspond à ta recherche. Essaie un autre mot-clé ou clique sur “Tout”.
+    </div>
+  </main>
 
-  </article>
-</main>
+  <footer>
+    <div>© <span id="year"></span> — Blog de Ahamedxassy</div>
+    <div style="margin-top:8px;">
+      <a href="../">Retour au portfolio</a>
+    </div>
+  </footer>
 
+  <script>
+    // Année auto
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const pills = Array.from(document.querySelectorAll(".pill"));
+    const searchInput = document.getElementById("searchInput");
+    const posts = Array.from(document.querySelectorAll(".post"));
+    const empty = document.getElementById("empty");
+
+    let activeFilter = "all";
+
+    function applyFilters() {
+      const q = (searchInput.value || "").trim().toLowerCase();
+      let visibleCount = 0;
+
+      posts.forEach(post => {
+        const cat = post.dataset.category;
+        const title = (post.dataset.title || "").toLowerCase();
+
+        const matchFilter = (activeFilter === "all") || (cat === activeFilter);
+        const matchSearch = !q || title.includes(q);
+
+        const show = matchFilter && matchSearch;
+        post.style.display = show ? "" : "none";
+        if (show) visibleCount++;
+      });
+
+      empty.style.display = (visibleCount === 0) ? "" : "none";
+    }
+
+    pills.forEach(p => {
+      p.addEventListener("click", () => {
+        pills.forEach(x => x.classList.remove("active"));
+        p.classList.add("active");
+        activeFilter = p.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener("input", applyFilters);
+
+    applyFilters();
+  </script>
 </body>
 </html>
